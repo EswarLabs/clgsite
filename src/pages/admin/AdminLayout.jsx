@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Users, Bell, LogOut, Code } from 'lucide-react';
+import { LayoutDashboard, Users, Bell, LogOut, ShieldCheck } from 'lucide-react';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (sessionStorage.getItem('admin_auth') !== '1') {
+      navigate('/admin/login', { replace: true });
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('admin_auth');
+    sessionStorage.removeItem('admin_user');
+    navigate('/admin/login', { replace: true });
+  };
+
+  const adminUser = sessionStorage.getItem('admin_user') || 'Admin';
 
   return (
     <div className="admin-layout">
@@ -11,16 +25,16 @@ const AdminLayout = () => {
       <aside className="admin-sidebar">
         <div className="admin-sidebar-header">
           <div className="flex items-center gap-2">
-            <Code size={24} className="text-primary-color" />
+            <ShieldCheck size={22} style={{ color: '#60a5fa' }} />
             <h2>NBKRIST Admin</h2>
           </div>
         </div>
-        
+
         <nav className="admin-nav">
           <ul>
             <li>
-              <NavLink 
-                to="/admin" 
+              <NavLink
+                to="/admin"
                 end
                 className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
               >
@@ -29,8 +43,8 @@ const AdminLayout = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                to="/admin/faculty" 
+              <NavLink
+                to="/admin/faculty"
                 className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
               >
                 <Users size={20} />
@@ -38,8 +52,8 @@ const AdminLayout = () => {
               </NavLink>
             </li>
             <li>
-              <NavLink 
-                to="/admin/notifications" 
+              <NavLink
+                to="/admin/notifications"
                 className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
               >
                 <Bell size={20} />
@@ -49,10 +63,14 @@ const AdminLayout = () => {
           </ul>
         </nav>
 
-        <div className="admin-sidebar-header" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: 'none' }}>
-          <button className="admin-nav-item" style={{ width: '100%', border: 'none', background: 'none' }} onClick={() => navigate('/')}>
+        <div className="admin-sidebar-header" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: 'none', marginTop: 'auto' }}>
+          <button
+            className="admin-nav-item"
+            style={{ width: '100%', border: 'none', background: 'none', cursor: 'pointer' }}
+            onClick={handleLogout}
+          >
             <LogOut size={20} />
-            <span>Return to Site</span>
+            <span>Logout</span>
           </button>
         </div>
       </aside>
@@ -68,6 +86,9 @@ const AdminLayout = () => {
             </p>
           </div>
           <div className="flex items-center gap-4">
+            <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+              Signed in as <strong style={{ color: 'var(--text-primary)' }}>{adminUser}</strong>
+            </span>
             <span className="badge badge-primary">Admin Session</span>
           </div>
         </header>

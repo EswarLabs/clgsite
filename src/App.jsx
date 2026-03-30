@@ -9,13 +9,13 @@ import Home from './pages/Home';
 
 // Admin Pages
 import AdminLayout from './pages/admin/AdminLayout';
+import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminFaculty from './pages/admin/AdminFaculty';
 import AdminNotifications from './pages/admin/AdminNotifications';
 
 // Department Pages
 import DepartmentPage from './pages/DepartmentPage';
-
 
 const MainLayout = () => {
   return (
@@ -40,7 +40,10 @@ const App = () => {
           <Route path="/department/:deptSlug/:subSlug?" element={<DepartmentPage />} />
         </Route>
 
-        {/* Admin Routes */}
+        {/* Admin Login (public) */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+
+        {/* Admin Routes (guarded inside AdminLayout) */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboard />} />
           <Route path="faculty" element={<AdminFaculty />} />
@@ -52,3 +55,4 @@ const App = () => {
 };
 
 export default App;
+
