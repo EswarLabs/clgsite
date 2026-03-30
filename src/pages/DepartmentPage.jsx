@@ -188,7 +188,7 @@ const DepartmentPage = () => {
         .n-dept-sidebar-links a:hover { background: #f9f9f9; color: var(--primary); padding-left: 22px; }
         .n-dept-sidebar-links a.active { background: #eef4ff; color: var(--primary); border-left: 4px solid var(--accent); padding-left: 18px; font-weight: 600; }
         .n-dept-sidebar-links a.active i { color: var(--accent); }
-        
+
         .n-faculty-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
         .n-faculty-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; transition: transform 0.3s; }
         .n-faculty-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
@@ -199,6 +199,69 @@ const DepartmentPage = () => {
         .n-faculty-attr { margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
         .n-btn-profile { background: #f0f4f8; color: var(--primary); padding: 8px 15px; border-radius: 20px; text-decoration: none; font-size: 0.8rem; font-weight: 600; margin-top: 15px; transition: 0.3s; }
         .n-btn-profile:hover { background: var(--accent); color: #fff; }
+
+        /* ── Legacy sub-page HTML resets ─────────────────────────────────────── */
+        /* Neutralise PHP/Bootstrap-3 boilerplate inside dangerouslySetInnerHTML */
+        .n-dept-content-block #page-main,
+        .n-dept-content-block #right-sidebar,
+        .n-dept-content-block .container-fluid,
+        .n-dept-content-block section { all: unset; display: block; }
+
+        /* Hide empty Bootstrap 3 carousels that have no slides */
+        .n-dept-content-block .carousel,
+        .n-dept-content-block .carousel-inner,
+        .n-dept-content-block .carousel-control,
+        .n-dept-content-block .glyphicon { display: none !important; }
+
+        /* Reset legacy <font> tags */
+        .n-dept-content-block font { color: inherit !important; font-size: inherit !important; font-family: inherit !important; }
+
+        /* Clean up hardcoded coloured headings */
+        .n-dept-content-block h1,
+        .n-dept-content-block h2,
+        .n-dept-content-block h3,
+        .n-dept-content-block h4 {
+          font-size: 1.05rem; font-weight: 700;
+          color: var(--primary) !important;
+          background: none !important;
+          padding: 6px 0 !important;
+          margin: 14px 0 6px !important;
+          border: none !important;
+        }
+        .n-dept-content-block h3 { font-size: 1.1rem; }
+
+        /* Responsive, modern tables */
+        .n-dept-content-block table {
+          width: 100%; border-collapse: collapse;
+          font-size: 0.88rem; margin: 12px 0;
+        }
+        .n-dept-content-block th,
+        .n-dept-content-block td { padding: 8px 12px; border: 1px solid var(--border, #e8e8e8); vertical-align: top; }
+        .n-dept-content-block thead th,
+        .n-dept-content-block th { background: var(--primary); color: #fff !important; font-weight: 600; }
+        .n-dept-content-block tr:nth-child(even) td { background: #f7f9fc; }
+        .n-dept-content-block td[background],
+        .n-dept-content-block th[background] { background-image: none !important; }
+
+        /* Links */
+        .n-dept-content-block a { color: var(--accent); text-decoration: none; }
+        .n-dept-content-block a:hover { text-decoration: underline; }
+
+        /* Body text */
+        .n-dept-content-block p,
+        .n-dept-content-block .text1,
+        .n-dept-content-block .ContentM,
+        .n-dept-content-block .ContentMNoIndent {
+          line-height: 1.75; color: var(--text-muted, #555);
+          margin-bottom: 10px; all: unset; display: block;
+          color: var(--text-muted, #555); line-height: 1.75; margin-bottom: 10px;
+        }
+        .n-dept-content-block center { display: block; text-align: left; }
+        .n-dept-content-block b, .n-dept-content-block strong { color: var(--primary); }
+        .n-dept-content-block hr { border: none; border-top: 1px solid #eee; margin: 10px 0; }
+        .n-dept-content-block ul, .n-dept-content-block ol { padding-left: 20px; margin-bottom: 10px; }
+        .n-dept-content-block li { margin-bottom: 4px; line-height: 1.65; color: var(--text-muted, #555); }
+        /* ──────────────────────────────────────────────────────────────────────── */
       `}</style>
 
       <PageHero

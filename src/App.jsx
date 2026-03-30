@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 
 // Main Site Components
 import Header from './components/Header';
@@ -15,7 +15,7 @@ import AdminNotifications from './pages/admin/AdminNotifications';
 
 // Department Pages
 import DepartmentPage from './pages/DepartmentPage';
-import FacultyPage from './pages/FacultyPage';
+
 
 const MainLayout = () => {
   return (
